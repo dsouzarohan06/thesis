@@ -7,6 +7,7 @@
 
 HOSTS='./hosts'
 PID='/tmp/lock.file'
+DOCKER_STATS='/tmp/docker.stats'
 
 if [ -f "$PID" ]
 then
@@ -14,6 +15,7 @@ then
       	exit 2
 else
 	echo > $PID
+	/bin/docker stats --no-stream > $DOCKER_STATS
 fi
 
 for i in `tail -n +2 $HOSTS`
